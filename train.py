@@ -32,7 +32,7 @@ def train(train_data, batch_size=72, input_shape=[32,32,1], epoch_num=10, pre_tr
                 real_z, fake_z = dasc.G(x_batch, alpha=alpha)
                 dasc.D(real_z, fake_z, r)
                 d_var = [dasc._U[i].trainable_variables[0] for i in range(k)]
-                # print(d_var)
+                print(d_var)
                 for i in range(d_iter_num):
                     with tf.GradientTape(watch_accessed_variables=False) as tape:
                         tape.watch(d_var)
