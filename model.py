@@ -65,8 +65,8 @@ class Projection(Layer):
 		super(Projection, self).build(input_shape)  # 一定要在最后调用它
 
 	def call(self, z):
-		# U = tf.keras.utils.normalize(U, axis=1, order=2)
-		U = utils.u_normalize(self.U)
+		U = tf.keras.utils.normalize(U, axis=1, order=2)
+		#U = utils.u_normalize(self.U)
 		z = K.dot(K.transpose(self.U), z)
 		# z = K.relu(z)
 		z = K.dot(self.U, z)
