@@ -10,6 +10,8 @@ from model import Mnist_ConvAE
 from model import DASC
 import utils
 from sklearn.cluster import SpectralClustering
+from sklearn import metrics
+# from sklearn.metrics import accuracy_score
 
 # block warnings
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
@@ -65,7 +67,8 @@ def train(train_data, batch_size=1000, input_shape=[28,28,1], epoch_num=10, pre_
                 y_hat = sc.fit_predict(affinity)
                 y_hat = y_hat.astype(int)
                 y_true = tf.reshape(y_batch, y_hat.shape)
-                acc = utils.cluster_accuracy(y_true, y_hat)
+                acc = metrics.accuracy_score(y_true, y_hat)
+                #acc = metrics.accuracy_score(y_true, y_hat, normalize=True)
 
                 g_grads = gtape.gradient(G_loss, g_var)
 
