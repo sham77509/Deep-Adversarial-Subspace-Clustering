@@ -66,8 +66,8 @@ def train(train_data, batch_size=1000, input_shape=[28,28,1], epoch_num=10, pre_
                 sc = SpectralClustering(n_clusters=k, eigen_solver='arpack', affinity='precomputed', n_init=100, assign_labels='kmeans')
                 y_hat = sc.fit_predict(affinity)
                 y_hat = y_hat.astype(int)
-                y_true = tf.reshape(y_batch, y_hat.shape)
-                acc = utils.cluster_accuracy(y_true, y_hat)
+                y_true = tf.reshape(y_batch, y_hat.shape).numpy()
+                acc = utils.acc(y_true, y_hat)
                 #acc = metrics.accuracy_score(y_true, y_hat, normalize=True)
 
                 g_grads = gtape.gradient(G_loss, g_var)
