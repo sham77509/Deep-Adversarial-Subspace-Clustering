@@ -9,7 +9,7 @@ from model import ConvAE
 from model import DASC
 import utils
 from sklearn.cluster import SpectralClustering
-from sklearn import metrics
+
 # block warnings
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
@@ -63,8 +63,8 @@ def train(train_data, batch_size=72, input_shape=[32,32,1], epoch_num=10, pre_tr
                 sc = SpectralClustering(n_clusters=20, eigen_solver='arpack', affinity='precomputed', n_init=100, assign_labels='kmeans')
                 y_hat = sc.fit_predict(affinity)
                 y_hat = y_hat.astype(int)
-                y_true = tf.reshape(y_batch, y_hat.shape)
-                acc = metrics.accuracy_score(y_true, y_hat)
+                y_true = tf.reshape(y_batch, y_hat.shape).numpy()
+                acc = utils.acc(y_true, y_hat)
                 #acc = metrics.accuracy_score(y_true, y_hat,normalize=True)
 
                 g_grads = gtape.gradient(G_loss, g_var)
