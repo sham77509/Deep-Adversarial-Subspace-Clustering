@@ -82,7 +82,7 @@ def cluster_accuracy(y_true, y_pred):
     # Return
         accuracy, in [0,1]
     """
-    y_true = y_true.astype(np.int64)
+    y_true = y_true.astype(int)
     assert y_pred.size == y_true.size
     D = max(y_pred.max(), y_true.max()) + 1
     w = np.zeros((D, D), dtype=np.int64)
