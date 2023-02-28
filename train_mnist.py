@@ -107,6 +107,6 @@ def load_mnist():
 x_train, y_train = load_mnist()
 train_db = tf.data.Dataset.from_tensor_slices((x_train, y_train))
 train_db = train_db.batch(1000).shuffle(10)
-train(train_db, epoch_num=20, batch_size=1000, pre_train_epoch=1000, alpha=0.9, g_lr=1e-3, d_lr=2e-4)
+train(train_db, epoch_num=20, batch_size=1000, pre_train_epoch=20000, alpha=0.9, g_lr=1e-3, d_lr=2e-4)
 
 
