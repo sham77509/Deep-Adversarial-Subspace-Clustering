@@ -9,6 +9,12 @@ import train_mnist
 from train import train
 import utils
 
+if torch.cuda.is_available():
+    os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+    print("running on GPU")
+else:
+    print("running on CPU")
+
 def load_data(path='data/COIL20.mat'):
     try:
         print("loading data from {}\{}...".format(os.getcwd(), path))
