@@ -79,8 +79,13 @@ def err_rate(gt_s, s):
 	c_x = best_map(gt_s,s)
 	err_x = np.sum(gt_s[:] != c_x[:])
 	missrate = err_x.astype(float) / (gt_s.shape[0])
+
 	return missrate  
 def acc(y_true, y_pred):
+
+	num = np.argwhere(y_pred - y_true == 0).shape[0]
+	return num / y_true.shape[0]
+# def acc(y_true, y_pred):
     """
     Calculate clustering accuracy. Require scikit-learn installed
     # Arguments
@@ -89,12 +94,12 @@ def acc(y_true, y_pred):
     # Return
         accuracy, in [0,1]
     """
-    y_true = y_true.astype(np.int64)
-    assert y_pred.size == y_true.size
-    D = max(y_pred.max(), y_true.max()) + 1
-    w = np.zeros((D, D), dtype=np.int64)
-    for i in range(y_pred.size):
-        w[y_pred[i], y_true[i]] += 1
-    ind = linear_sum_assignment(w.max() - w)
-    ind = np.array(ind).T
-    return sum([w[i, j] for i, j in ind]) * 1.0 / y_pred.size
+#     y_true = y_true.astype(np.int64)
+#     assert y_pred.size == y_true.size
+#     D = max(y_pred.max(), y_true.max()) + 1
+#     w = np.zeros((D, D), dtype=np.int64)
+#     for i in range(y_pred.size):
+#         w[y_pred[i], y_true[i]] += 1
+#     ind = linear_sum_assignment(w.max() - w)
+#     ind = np.array(ind).T
+#     return sum([w[i, j] for i, j in ind]) * 1.0 / y_pred.size
