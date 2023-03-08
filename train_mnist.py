@@ -16,7 +16,7 @@ from sklearn.cluster import SpectralClustering
 # block warnings
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
-def train(train_data, batch_size=1000, input_shape=[28,28,1], epoch_num=10, pre_train_epoch=10,
+def train(train_data, batch_size=128, input_shape=[28,28,1], epoch_num=10, pre_train_epoch=10,
           k=10, d_iter_num=5, r=10, alpha=0.95, g_lr=1e-3, d_lr=2e-4, save_dir='model'):
 
     inputs = tuple([batch_size] + input_shape)
@@ -107,6 +107,6 @@ def load_mnist():
 x_train, y_train = load_mnist()
 train_db = tf.data.Dataset.from_tensor_slices((x_train, y_train))
 train_db = train_db.batch(1000).shuffle(10)
-train(train_db, epoch_num=20, batch_size=1000, pre_train_epoch=20000, alpha=0.9, g_lr=1e-3, d_lr=2e-4)
+train(train_db, epoch_num=20, batch_size=128, pre_train_epoch=100, alpha=0.9, g_lr=1e-3, d_lr=2e-4)
 
 
