@@ -9,10 +9,6 @@ import train_mnist
 from train import train
 import utils
 
-gpus = tf.config.list_physical_devices("GPU")
-if gpus:
-    tf.config.experimental.set_memory_growth(gpus[0],True)
-
 def load_data(path='data/COIL20.mat'):
     try:
         print("loading data from {}\{}...".format(os.getcwd(), path))
